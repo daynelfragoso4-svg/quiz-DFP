@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1f1a">
+<title>DFP Education | Medio ambiente</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --ink:#eef3e4; --soft:#b9cbb3; --moss:#8fd18a; --water:#74c3d9; --sand:#e8d9a8; --bark:#5a3d2a;
+  --panel:rgba(8,24,19,.55); --line:rgba(238,243,228,.18);
+  --serif:"Fraunces",Georgia,serif; --sans:"Figtree",system-ui,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#eef3e4;--soft:#b9cbb3;--panel:rgba(8,24,19,.55)}}
+:root[data-theme="dark"]{--ink:#eef3e4}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:#0b1f1a;color:var(--ink);font:400 1.05rem/1.65 var(--sans);overflow-x:hidden}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:calc(.8rem + env(safe-area-inset-top,0px)) 1.4rem .8rem;background:linear-gradient(rgba(8,22,18,.85),rgba(8,22,18,0))}
+header strong{font:700 1.15rem var(--serif);letter-spacing:.01em}
+nav{display:flex;gap:1.2rem;flex-wrap:wrap}
+nav a{color:var(--soft);text-decoration:none;font-weight:500;font-size:.95rem;padding:.2rem 0;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--moss);outline:none}
+section,footer{position:relative;z-index:2}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:7rem 1.6rem 12rem;max-width:1100px;margin:0 auto}
+.hero h1{font:900 clamp(2.8rem,9vw,7rem)/.95 var(--serif);margin:0 0 1.4rem;letter-spacing:-.02em;max-width:12ch}
+.hero p{max-width:46ch;font-size:1.2rem;color:var(--soft);margin:0 0 2rem}
+.hero h1,.hero p,.hero .btn{opacity:0;transform:translateY(24px);animation:in 1.2s cubic-bezier(.2,.7,.2,1) forwards}
+.hero p{animation-delay:.35s}.hero .btn{animation-delay:.7s}
+@keyframes in{to{opacity:1;transform:none}}
+.btn{align-self:flex-start;display:inline-block;background:var(--moss);color:#0b2417;text-decoration:none;font-weight:600;padding:.9rem 1.6rem;border-radius:999px;border:0;cursor:pointer;font:600 1rem var(--sans)}
+.btn:hover,.btn:focus-visible{background:#b6e8a8;outline:3px solid rgba(143,209,138,.4);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn.ghost:hover{background:rgba(238,243,228,.08)}
+.hills{position:absolute;left:0;right:0;bottom:0;height:42vh;min-height:260px;z-index:0;pointer-events:none}
+.hills svg{position:absolute;bottom:0;left:-5%;width:110%;height:100%}
+.hills .l1{transition:transform .2s linear}
+.wrap{max-width:1000px;margin:0 auto;padding:6rem 1.6rem}
+.wrap h2{font:700 clamp(2rem,5vw,3.4rem)/1.05 var(--serif);margin:0 0 1rem;letter-spacing:-.01em}
+.lead{color:var(--soft);max-width:52ch;font-size:1.15rem}
+.layer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:2.5rem;align-items:center;padding:3.2rem 0;border-top:1px solid var(--line)}
+.layer h3{font:700 2rem/1.1 var(--serif);margin:0}
+.layer .n{font:900 clamp(3rem,8vw,5.5rem)/1 var(--serif);color:var(--accent,var(--moss));display:block}
+.layer p{margin:.4rem 0 0;max-width:50ch;color:var(--soft)}
+.forest{--accent:var(--moss)}.water{--accent:var(--water)}.air{--accent:var(--sand)}
+.bosque-box{position:relative;height:300px;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:crosshair;
+  background:linear-gradient(#1a4a5e 0%,#2b6b72 55%,#3d7a4a 55%,#2a5a34 100%);margin-top:1.6rem;touch-action:manipulation}
+.bosque-box .msg{position:absolute;top:1rem;left:1rem;right:1rem;font-size:.95rem;color:#e6f3e0;pointer-events:none}
+.tree{position:absolute;bottom:0;width:36px;height:80px;transform-origin:50% 100%;transform:translateX(-50%) scale(0);animation:grow 1.4s cubic-bezier(.3,1.4,.5,1) forwards;pointer-events:none}
+.tree i{position:absolute;left:50%;bottom:0;width:7px;height:44%;background:var(--bark);transform:translateX(-50%);border-radius:2px}
+.tree b{position:absolute;left:50%;top:0;width:100%;height:72%;transform:translateX(-50%);border-radius:50% 50% 45% 45%;background:var(--c,#5fbf6a)}
+@keyframes grow{to{transform:translateX(-50%) scale(var(--s,1))}}
+.stats{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;margin-top:1.1rem}
+.stats strong{font:900 2.4rem/1 var(--serif);color:var(--moss)}
+.stats span{color:var(--soft)}
+.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:2rem}
+.app{background:var(--panel);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:22px;padding:1.8rem}
+.app h3{font:700 1.6rem var(--serif);margin:0 0 .5rem}
+.app p{color:var(--soft);margin:0 0 1.2rem}
+footer{padding:3rem 1.6rem calc(3rem + env(safe-area-inset-bottom,0px));text-align:center;color:var(--soft);font-size:.92rem;background:linear-gradient(transparent,rgba(5,14,11,.8))}
+footer p{margin:.2rem 0}
+@media (max-width:720px){.layer{grid-template-columns:1fr;gap:.8rem}nav{gap:.8rem}nav a{font-size:.85rem}header strong{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;scroll-behavior:auto!important}}
+
+/* TARJETA DEL CÓDIGO QR */
+.qr-card{display:flex;flex-direction:column;align-items:flex-start}
+.qr-plate{
+  display:flex;justify-content:center;align-items:center;
+  width:230px;min-height:230px;padding:14px;margin:10px 0 18px;
+  background:#fff;border:3px solid var(--moss);border-radius:18px;
+  box-shadow:0 0 25px rgba(143,209,138,.2);line-height:0;
+}
+.qr-plate svg{display:block;width:100%;height:auto}
+.qr-url{font:500 .85rem/1.5 var(--sans);color:var(--soft);overflow-wrap:anywhere;margin:0 0 1rem;user-select:all}
+.qr-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.qr-actions .btn{padding:.7rem 1.2rem;font-size:.92rem}
+.qr-status{font-size:.9rem;color:var(--moss);min-height:1.4em}
+@media(max-width:480px){.qr-plate{width:200px;min-height:200px}.qr-actions{flex-direction:column;align-items:flex-start}}
+
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<header>
+  <strong>DFP Education</strong>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#informacion">Información</a>
+    <a href="#aplicaciones">Aplicaciones</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <section id="inicio" class="hero">
+    <h1>Cuidamos lo que nos sostiene</h1>
+    <p>Bienvenido a la app de información del Politécnico Nuestra Señora de la Altagracia. Hoy recorremos el bosque, el agua y el aire que compartimos.</p>
+    <a href="#informacion" class="btn">Empezar el recorrido</a>
+    <div class="hills" aria-hidden="true">
+      <svg class="l1" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 170 C150 90 300 120 450 160 S750 200 900 130 1100 90 1200 140 V300 H0Z" fill="#14402f" opacity=".75"/></svg>
+      <svg class="l2" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 220 C200 160 380 230 600 200 S1000 150 1200 210 V300 H0Z" fill="#0f3325" opacity=".92"/></svg>
+      <svg class="l3" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 260 C250 230 450 280 700 255 S1050 235 1200 262 V300 H0Z" fill="#0a251b"/></svg>
+    </div>
+  </section>
+
+  <section id="informacion">
+    <div class="wrap">
+      <h2>Información general</h2>
+      <p class="lead">Conoce más sobre el Politécnico Nuestra Señora de la Altagracia y sus áreas educativas. Aprender a cuidar el planeta también es parte de la formación. Estas son las tres capas de vida que protegemos.</p>
+
+      <div class="layer forest">
+        <div><span class="n">31 %</span><h3>El bosque</h3></div>
+        <p>Los bosques cubren cerca de un tercio de la superficie terrestre. Dan sombra, guardan agua en el suelo, absorben carbono y sirven de casa a la mayor parte de la vida en tierra firme.</p>
+      </div>
+      <div class="layer water">
+        <div><span class="n">3 %</span><h3>El agua dulce</h3></div>
+        <p>Solo alrededor del 3 % del agua del planeta es dulce, y gran parte está en glaciares o bajo tierra. Cerrar el grifo y no contaminar los ríos protege lo poco que podemos beber.</p>
+      </div>
+      <div class="layer air">
+        <div><span class="n">8 000 000</span><h3>Toneladas de plástico</h3></div>
+        <p>Es la cifra que suele citarse de plástico que llega cada año a los océanos. Reducir, reutilizar y reciclar en el centro y en casa corta ese camino desde el origen.</p>
+      </div>
+
+      <h2 style="margin-top:3rem">Planta tu árbol</h2>
+      <p class="lead">Toca el paisaje para sembrar. Cada árbol adulto puede absorber unos 20 kg de CO₂ al año, aproximadamente.</p>
+      <div class="bosque-box" id="bosque" role="img" aria-label="Paisaje donde puedes sembrar árboles al tocarlo">
+        <div class="msg" id="msg">Toca cualquier punto de la colina para plantar.</div>
+      </div>
+      <div class="stats">
+        <div><strong id="count">0</strong> <span>árboles sembrados</span></div>
+        <div><strong id="co2">0</strong> <span>kg de CO₂ al año</span></div>
+        <button class="btn" id="plant" type="button">Plantar un árbol</button>
+        <button class="btn ghost" id="reset" type="button">Empezar de nuevo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="aplicaciones">
+    <div class="wrap">
+      <h2>Aplicaciones generales</h2>
+      <div class="apps">
+        <div class="app">
+          <h3>Escosoft</h3>
+          <p>Plataforma para acceder a los servicios educativos.</p>
+          <a class="btn" href="https://escosoft.online/login" target="_blank" rel="noopener">Abrir aplicación</a>
+        </div>
+        <div class="app">
+          <h3>DFP Education</h3>
+          <p>Espacio de información y recursos del centro educativo.</p>
+          <a class="btn ghost" href="#informacion">Explorar</a>
+        </div>
+        <div class="app qr-card" id="qr">
+          <h3>Esta app en tu celular</h3>
+          <p>Escanea el código con la cámara de tu celular para abrir DFP Education.</p>
+          <div class="qr-plate" id="qrPlate" role="img" aria-label="Código QR que abre DFP Education"></div>
+          <p class="qr-url" id="qrUrl"></p>
+          <div class="qr-actions">
+            <button class="btn ghost" id="qrCopy" type="button">Copiar enlace</button>
+            <span class="qr-status" id="qrStatus" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <h2>Sobre este proyecto</h2>
+      <p class="lead">Desarrollado por DFP como práctica de programación y desarrollo web. Es mi primera aplicación y aquí compartiré información sobre nuestro centro educativo.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 DFP Education | Proyecto educativo</p>
+  <p>Desarrollado con HTML, CSS y JavaScript</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+(function(){
+  /* Fondo que cambia con el recorrido: copa, río, mar, tierra */
+  var stops=[[11,31,26],[18,60,46],[24,84,66],[18,72,92],[12,44,70],[34,44,28]];
+  function lerp(a,b,t){return a+(b-a)*t}
+  function bg(){
+    var max=document.documentElement.scrollHeight-innerHeight, p=max>0?scrollY/max:0;
+    var x=p*(stops.length-1), i=Math.min(Math.floor(x),stops.length-2), t=x-i, a=stops[i], b=stops[i+1];
+    document.body.style.background='rgb('+[0,1,2].map(function(k){return Math.round(lerp(a[k],b[k],t))}).join(',')+')';
+    var h=document.querySelector('.hills .l1'); if(h) h.style.transform='translateY('+(scrollY*.12)+'px)';
+  }
+  addEventListener('scroll',bg,{passive:true}); addEventListener('resize',bg); bg();
+
+  /* Hojas y luciérnagas */
+  var cv=document.getElementById('fx'), cx=cv.getContext('2d'), W,H,P=[], mx=.5;
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){var d=devicePixelRatio||1;W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;cv.dpr=d}
+  size(); addEventListener('resize',size);
+  addEventListener('pointermove',function(e){mx=e.clientX/innerWidth});
+  var cols=['#8fd18a','#b6e08a','#d9c76a','#6fbf7a'];
+  function mk(){var leaf=Math.random()<.7;return{x:Math.random()*W,y:Math.random()*H,r:(leaf?5:2)*cv.dpr*(.6+Math.random()),
+    vy:(.25+Math.random()*.6)*cv.dpr,ph:Math.random()*6.28,sp:.004+Math.random()*.01,rot:Math.random()*6.28,leaf:leaf,c:cols[Math.floor(Math.random()*cols.length)]}}
+  for(var i=0;i<(calm?20:70);i++)P.push(mk());
+  function draw(t){
+    cx.clearRect(0,0,W,H);
+    P.forEach(function(p){
+      p.ph+=p.sp; p.rot+=.01;
+      p.y+=(p.leaf?p.vy:-p.vy*.25); p.x+=Math.sin(p.ph*3)*.6*cv.dpr+(mx-.5)*1.4*cv.dpr;
+      if(p.y>H+20){p.y=-20;p.x=Math.random()*W} if(p.y<-20){p.y=H+20} if(p.x<-20)p.x=W+20; if(p.x>W+20)p.x=-20;
+      cx.save(); cx.translate(p.x,p.y);
+      if(p.leaf){cx.rotate(p.rot);cx.globalAlpha=.55;cx.fillStyle=p.c;cx.beginPath();cx.ellipse(0,0,p.r,p.r*.45,0,0,6.28);cx.fill()}
+      else{var g=.4+.6*Math.abs(Math.sin(t/900+p.ph));cx.globalAlpha=g*.8;cx.shadowColor='#ffe98a';cx.shadowBlur=12*cv.dpr;cx.fillStyle='#fff3b0';cx.beginPath();cx.arc(0,0,p.r,0,6.28);cx.fill()}
+      cx.restore();
+    });
+    if(!calm) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  /* Plantar árboles */
+  var box=document.getElementById('bosque'), n=0, msg=document.getElementById('msg');
+  var greens=['#5fbf6a','#4aa860','#7bcf72','#3f9a5a','#8ad07a'];
+  function plant(x,y){
+    var d=document.createElement('div'); d.className='tree';
+    var s=.7+Math.random()*.7; d.style.left=x+'px'; d.style.bottom=Math.max(0,y)+'px';
+    d.style.setProperty('--s',s); d.style.setProperty('--c',greens[Math.floor(Math.random()*greens.length)]);
+    d.innerHTML='<i></i><b></b>'; box.appendChild(d); n++; update();
+  }
+  function update(){
+    document.getElementById('count').textContent=n; document.getElementById('co2').textContent=n*20;
+    msg.textContent = n===0 ? 'Toca cualquier punto de la colina para plantar.' : n<10 ? 'Así empieza un bosque.' : 'Ya se oye el viento entre las hojas.';
+  }
+  box.addEventListener('pointerdown',function(e){
+    var r=box.getBoundingClientRect(); plant(e.clientX-r.left, Math.min(r.bottom-e.clientY-10, r.height*.42));
+  });
+  document.getElementById('plant').addEventListener('click',function(){
+    plant(30+Math.random()*(box.clientWidth-60), Math.random()*box.clientHeight*.4);
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    box.querySelectorAll('.tree').forEach(function(t){t.remove()}); n=0; update();
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var plate = document.getElementById('qrPlate');
+  var urlEl = document.getElementById('qrUrl');
+  var copyBtn = document.getElementById('qrCopy');
+  var status = document.getElementById('qrStatus');
+
+  if (!plate || !urlEl || !copyBtn || !status) return;
+
+  // Toma automáticamente la dirección desde la que se está viendo la página.
+  var appUrl = window.location.href.split('#')[0];
+  urlEl.textContent = appUrl;
+
+  try {
+    if (typeof qrcode !== 'function') throw new Error('La librería QR no está disponible.');
+    var qr = qrcode(0, 'M');
+    qr.addData(appUrl);
+    qr.make();
+    plate.innerHTML = qr.createSvgTag(4, 2);
+    var svg = plate.querySelector('svg');
+    if (svg) {
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Código QR para abrir DFP Education');
+      svg.setAttribute('shape-rendering', 'crispEdges');
+    }
+  } catch (error) {
+    plate.textContent = 'No se pudo generar el QR. Comprueba tu conexión a internet.';
+    status.textContent = 'Usa el enlace que aparece arriba.';
+  }
+
+  copyBtn.addEventListener('click', function () {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(appUrl).then(function () {
+        status.textContent = '¡Enlace copiado!';
+      }).catch(function () {
+        status.textContent = 'No se pudo copiar. Selecciona el enlace para copiarlo.';
+      });
+    } else {
+      status.textContent = 'Selecciona el enlace para copiarlo.';
+      var range = document.createRange();
+      range.selectNodeContents(urlEl);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
