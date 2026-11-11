@@ -1,298 +1,1135 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b1f1a">
-<title>DFP Education | Medio ambiente</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Figtree:wght@400;500;600&display=swap">
+<meta name="description" content="DFP Educación: proyecto educativo sobre reciclaje de aceites usados y protección ambiental.">
+<title>DFP Educación | Proyecto Ambiental</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=Figtree:wght@400;500;600;700&display=swap">
+
 <style>
-:root{
-  color-scheme:dark;
-  --ink:#eef3e4; --soft:#b9cbb3; --moss:#8fd18a; --water:#74c3d9; --sand:#e8d9a8; --bark:#5a3d2a;
-  --panel:rgba(8,24,19,.55); --line:rgba(238,243,228,.18);
-  --serif:"Fraunces",Georgia,serif; --sans:"Figtree",system-ui,sans-serif;
-  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+:root {
+    --bg: #0b1f1a;
+    --panel: #122d23;
+    --green: #8fd18a;
+    --water: #74c3d9;
+    --text: #eef3e4;
+    --muted: #b9cbb3;
+    --line: rgba(238,243,228,.16);
+    --font: "Figtree", sans-serif;
+    --title: "Fraunces", Georgia, serif;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#eef3e4;--soft:#b9cbb3;--panel:rgba(8,24,19,.55)}}
-:root[data-theme="dark"]{--ink:#eef3e4}
-*,*::before,*::after{box-sizing:inherit}
-html{height:100%;scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:#0b1f1a;color:var(--ink);font:400 1.05rem/1.65 var(--sans);overflow-x:hidden}
-#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-header{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:1rem;
-  padding:calc(.8rem + env(safe-area-inset-top,0px)) 1.4rem .8rem;background:linear-gradient(rgba(8,22,18,.85),rgba(8,22,18,0))}
-header strong{font:700 1.15rem var(--serif);letter-spacing:.01em}
-nav{display:flex;gap:1.2rem;flex-wrap:wrap}
-nav a{color:var(--soft);text-decoration:none;font-weight:500;font-size:.95rem;padding:.2rem 0;border-bottom:2px solid transparent}
-nav a:hover,nav a:focus-visible{color:var(--ink);border-color:var(--moss);outline:none}
-section,footer{position:relative;z-index:2}
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:7rem 1.6rem 12rem;max-width:1100px;margin:0 auto}
-.hero h1{font:900 clamp(2.8rem,9vw,7rem)/.95 var(--serif);margin:0 0 1.4rem;letter-spacing:-.02em;max-width:12ch}
-.hero p{max-width:46ch;font-size:1.2rem;color:var(--soft);margin:0 0 2rem}
-.hero h1,.hero p,.hero .btn{opacity:0;transform:translateY(24px);animation:in 1.2s cubic-bezier(.2,.7,.2,1) forwards}
-.hero p{animation-delay:.35s}.hero .btn{animation-delay:.7s}
-@keyframes in{to{opacity:1;transform:none}}
-.btn{align-self:flex-start;display:inline-block;background:var(--moss);color:#0b2417;text-decoration:none;font-weight:600;padding:.9rem 1.6rem;border-radius:999px;border:0;cursor:pointer;font:600 1rem var(--sans)}
-.btn:hover,.btn:focus-visible{background:#b6e8a8;outline:3px solid rgba(143,209,138,.4);outline-offset:3px}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn.ghost:hover{background:rgba(238,243,228,.08)}
-.hills{position:absolute;left:0;right:0;bottom:0;height:42vh;min-height:260px;z-index:0;pointer-events:none}
-.hills svg{position:absolute;bottom:0;left:-5%;width:110%;height:100%}
-.hills .l1{transition:transform .2s linear}
-.wrap{max-width:1000px;margin:0 auto;padding:6rem 1.6rem}
-.wrap h2{font:700 clamp(2rem,5vw,3.4rem)/1.05 var(--serif);margin:0 0 1rem;letter-spacing:-.01em}
-.lead{color:var(--soft);max-width:52ch;font-size:1.15rem}
-.layer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:2.5rem;align-items:center;padding:3.2rem 0;border-top:1px solid var(--line)}
-.layer h3{font:700 2rem/1.1 var(--serif);margin:0}
-.layer .n{font:900 clamp(3rem,8vw,5.5rem)/1 var(--serif);color:var(--accent,var(--moss));display:block}
-.layer p{margin:.4rem 0 0;max-width:50ch;color:var(--soft)}
-.forest{--accent:var(--moss)}.water{--accent:var(--water)}.air{--accent:var(--sand)}
-.bosque-box{position:relative;height:300px;border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:crosshair;
-  background:linear-gradient(#1a4a5e 0%,#2b6b72 55%,#3d7a4a 55%,#2a5a34 100%);margin-top:1.6rem;touch-action:manipulation}
-.bosque-box .msg{position:absolute;top:1rem;left:1rem;right:1rem;font-size:.95rem;color:#e6f3e0;pointer-events:none}
-.tree{position:absolute;bottom:0;width:36px;height:80px;transform-origin:50% 100%;transform:translateX(-50%) scale(0);animation:grow 1.4s cubic-bezier(.3,1.4,.5,1) forwards;pointer-events:none}
-.tree i{position:absolute;left:50%;bottom:0;width:7px;height:44%;background:var(--bark);transform:translateX(-50%);border-radius:2px}
-.tree b{position:absolute;left:50%;top:0;width:100%;height:72%;transform:translateX(-50%);border-radius:50% 50% 45% 45%;background:var(--c,#5fbf6a)}
-@keyframes grow{to{transform:translateX(-50%) scale(var(--s,1))}}
-.stats{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;margin-top:1.1rem}
-.stats strong{font:900 2.4rem/1 var(--serif);color:var(--moss)}
-.stats span{color:var(--soft)}
-.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:2rem}
-.app{background:var(--panel);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:22px;padding:1.8rem}
-.app h3{font:700 1.6rem var(--serif);margin:0 0 .5rem}
-.app p{color:var(--soft);margin:0 0 1.2rem}
-footer{padding:3rem 1.6rem calc(3rem + env(safe-area-inset-bottom,0px));text-align:center;color:var(--soft);font-size:.92rem;background:linear-gradient(transparent,rgba(5,14,11,.8))}
-footer p{margin:.2rem 0}
-@media (max-width:720px){.layer{grid-template-columns:1fr;gap:.8rem}nav{gap:.8rem}nav a{font-size:.85rem}header strong{display:none}}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;scroll-behavior:auto!important}}
 
-/* TARJETA DEL CÓDIGO QR */
-.qr-card{display:flex;flex-direction:column;align-items:flex-start}
-.qr-plate{
-  display:flex;justify-content:center;align-items:center;
-  width:230px;min-height:230px;padding:14px;margin:10px 0 18px;
-  background:#fff;border:3px solid var(--moss);border-radius:18px;
-  box-shadow:0 0 25px rgba(143,209,138,.2);line-height:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-.qr-plate svg{display:block;width:100%;height:auto}
-.qr-url{font:500 .85rem/1.5 var(--sans);color:var(--soft);overflow-wrap:anywhere;margin:0 0 1rem;user-select:all}
-.qr-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
-.qr-actions .btn{padding:.7rem 1.2rem;font-size:.92rem}
-.qr-status{font-size:.9rem;color:var(--moss);min-height:1.4em}
-@media(max-width:480px){.qr-plate{width:200px;min-height:200px}.qr-actions{flex-direction:column;align-items:flex-start}}
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.65;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8,24,19,.96);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--line);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font: 900 1.5rem var(--title);
+    color: var(--green);
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+.hero {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 90px 8%;
+    background:
+    linear-gradient(90deg,rgba(5,20,14,.95),rgba(5,20,14,.45)),
+    url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600")
+    center/cover;
+}
+
+.hero h1 {
+    font: 900 clamp(2.8rem,7vw,5.5rem)/1.05 var(--title);
+    max-width: 850px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 600px;
+    font-size: 1.15rem;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 23px;
+    background: var(--green);
+    color: #102519;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+.btn:hover {
+    background: #b6e8a8;
+}
+
+.btn.secondary {
+    background: transparent;
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 85px 25px;
+}
+
+.container h2 {
+    font: 700 clamp(2rem,5vw,3.2rem) var(--title);
+    margin-bottom: 15px;
+}
+
+.description {
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 35px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 25px;
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--green);
+}
+
+.card h3 {
+    font: 700 1.45rem var(--title);
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+.icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+section {
+    border-bottom: 1px solid var(--line);
+}
+
+.highlight {
+    color: var(--green);
+}
+
+.number {
+    font: 900 3rem var(--title);
+    color: var(--green);
+}
+
+.qr-card {
+    max-width: 450px;
+}
+
+.qr-plate {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    width: 230px;
+    min-height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.qr-plate svg {
+    width: 100%;
+    height: auto;
+}
+
+.qr-url {
+    color: var(--muted);
+    overflow-wrap: anywhere;
+    font-size: .85rem;
+    margin-bottom: 15px;
+}
+
+/* ECO CHALLENGE */
+
+.eco-game {
+    max-width: 760px;
+    margin: auto;
+    padding: 30px;
+    border-color: rgba(143,209,138,.35);
+}
+
+.game-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.game-progress {
+    width: 100%;
+    height: 9px;
+    background: rgba(255,255,255,.1);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#ecoProgress {
+    width: 0%;
+    height: 100%;
+    background: var(--green);
+    transition: width .3s;
+}
+
+#ecoNumber {
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+#ecoQuestion {
+    font: 700 1.7rem var(--title);
+    margin-bottom: 25px;
+}
+
+.eco-options {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+}
+
+.eco-option {
+    background: #193b2d;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    font: 600 1rem var(--font);
+    text-align: left;
+    transition: .2s;
+}
+
+.eco-option:hover:not(:disabled) {
+    border-color: var(--green);
+    background: #254b36;
+}
+
+.eco-option:disabled {
+    cursor: default;
+    opacity: .9;
+}
+
+.eco-option.correct {
+    border-color: #8fd18a;
+    background: #285d37;
+}
+
+.eco-option.incorrect {
+    border-color: #e18c80;
+    background: #63352e;
+}
+
+#ecoFeedback {
+    min-height: 35px;
+    margin: 18px 0;
+    color: var(--green);
+    font-weight: 700;
+}
+
+#ecoResult {
+    text-align: center;
+    padding: 20px;
+}
+
+#ecoResult h3 {
+    font: 700 2rem var(--title);
+}
+
+#ecoResult p {
+    margin: 12px 0;
+    color: var(--muted);
+}
+
+.eco-trophy {
+    font-size: 4rem;
+    margin: 20px 0;
+}
+
+.game-start {
+    text-align: center;
+}
+
+.game-start p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+footer {
+    padding: 35px 20px;
+    text-align: center;
+    color: var(--muted);
+}
+
+footer strong {
+    color: var(--green);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 4px;
+}
+
+@media(max-width:700px) {
+    header {
+        justify-content: center;
+    }
+
+    .logo {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        font-size: .82rem;
+    }
+
+    .hero {
+        min-height: 65vh;
+        padding: 70px 25px;
+    }
+
+    .container {
+        padding: 60px 20px;
+    }
+}
+
+@media(max-width:550px) {
+    .eco-options {
+        grid-template-columns: 1fr;
+    }
+
+    .eco-game {
+        padding: 20px;
+    }
+
+    #ecoQuestion {
+        font-size: 1.4rem;
+    }
+}
 </style>
 </head>
+
 <body>
-<canvas id="fx" aria-hidden="true"></canvas>
 
 <header>
-  <strong>DFP Education</strong>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#informacion">Información</a>
-    <a href="#aplicaciones">Aplicaciones</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
+    <div class="logo">DFP Educación</div>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#proyecto">Proyecto</a>
+        <a href="#impacto">Impacto</a>
+        <a href="#productos">Productos</a>
+        <a href="#formacion">Formación</a>
+        <a href="#donaciones">Donaciones</a>
+        <a href="#aplicaciones">Aplicaciones</a>
+        <a href="#juego">Mini juego</a>
+        <a href="#qr">QR</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
 </header>
 
 <main>
-  <section id="inicio" class="hero">
-    <h1>Cuidamos lo que nos sostiene</h1>
-    <p>Bienvenido a la app de información del Politécnico Nuestra Señora de la Altagracia. Hoy recorremos el bosque, el agua y el aire que compartimos.</p>
-    <a href="#informacion" class="btn">Empezar el recorrido</a>
-    <div class="hills" aria-hidden="true">
-      <svg class="l1" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 170 C150 90 300 120 450 160 S750 200 900 130 1100 90 1200 140 V300 H0Z" fill="#14402f" opacity=".75"/></svg>
-      <svg class="l2" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 220 C200 160 380 230 600 200 S1000 150 1200 210 V300 H0Z" fill="#0f3325" opacity=".92"/></svg>
-      <svg class="l3" viewBox="0 0 1200 300" preserveAspectRatio="none"><path d="M0 260 C250 230 450 280 700 255 S1050 235 1200 262 V300 H0Z" fill="#0a251b"/></svg>
-    </div>
-  </section>
 
-  <section id="informacion">
-    <div class="wrap">
-      <h2>Información general</h2>
-      <p class="lead">Conoce más sobre el Politécnico Nuestra Señora de la Altagracia y sus áreas educativas. Aprender a cuidar el planeta también es parte de la formación. Estas son las tres capas de vida que protegemos.</p>
+<!-- INICIO -->
+<section id="inicio" class="hero">
+    <h1>Transformemos el aceite usado en oportunidades.</h1>
 
-      <div class="layer forest">
-        <div><span class="n">31 %</span><h3>El bosque</h3></div>
-        <p>Los bosques cubren cerca de un tercio de la superficie terrestre. Dan sombra, guardan agua en el suelo, absorben carbono y sirven de casa a la mayor parte de la vida en tierra firme.</p>
-      </div>
-      <div class="layer water">
-        <div><span class="n">3 %</span><h3>El agua dulce</h3></div>
-        <p>Solo alrededor del 3 % del agua del planeta es dulce, y gran parte está en glaciares o bajo tierra. Cerrar el grifo y no contaminar los ríos protege lo poco que podemos beber.</p>
-      </div>
-      <div class="layer air">
-        <div><span class="n">8 000 000</span><h3>Toneladas de plástico</h3></div>
-        <p>Es la cifra que suele citarse de plástico que llega cada año a los océanos. Reducir, reutilizar y reciclar en el centro y en casa corta ese camino desde el origen.</p>
-      </div>
+    <p>
+        Bienvenido a DFP Educación, una plataforma educativa
+        dedicada al reciclaje de aceites usados, la protección
+        del medio ambiente y la formación de una comunidad responsable.
+    </p>
 
-      <h2 style="margin-top:3rem">Planta tu árbol</h2>
-      <p class="lead">Toca el paisaje para sembrar. Cada árbol adulto puede absorber unos 20 kg de CO₂ al año, aproximadamente.</p>
-      <div class="bosque-box" id="bosque" role="img" aria-label="Paisaje donde puedes sembrar árboles al tocarlo">
-        <div class="msg" id="msg">Toca cualquier punto de la colina para plantar.</div>
-      </div>
-      <div class="stats">
-        <div><strong id="count">0</strong> <span>árboles sembrados</span></div>
-        <div><strong id="co2">0</strong> <span>kg de CO₂ al año</span></div>
-        <button class="btn" id="plant" type="button">Plantar un árbol</button>
-        <button class="btn ghost" id="reset" type="button">Empezar de nuevo</button>
-      </div>
-    </div>
-  </section>
+    <a href="#proyecto" class="btn">Conocer el proyecto</a>
+</section>
 
-  <section id="aplicaciones">
-    <div class="wrap">
-      <h2>Aplicaciones generales</h2>
-      <div class="apps">
-        <div class="app">
-          <h3>Escosoft</h3>
-          <p>Plataforma para acceder a los servicios educativos.</p>
-          <a class="btn" href="https://escosoft.online/login" target="_blank" rel="noopener">Abrir aplicación</a>
+<!-- PROYECTO -->
+<section id="proyecto">
+    <div class="container">
+        <h2>Proyecto de ciencias</h2>
+
+        <p class="description">
+            Investigación sobre los aceites usados, sus efectos
+            en el medio ambiente y las alternativas para su
+            recolección, reciclaje y aprovechamiento.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="icon">🔬</div>
+                <h3>Introducción</h3>
+                <p>
+                    El aceite de cocina usado es un residuo que
+                    necesita una gestión adecuada para evitar daños ambientales.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">🎯</div>
+                <h3>Objetivo</h3>
+                <p>
+                    Promover la recolección y el reciclaje de aceites
+                    usados mediante educación y participación comunitaria.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">🌱</div>
+                <h3>Justificación</h3>
+                <p>
+                    Buscamos reducir la contaminación y fomentar
+                    hábitos responsables en los hogares y establecimientos.
+                </p>
+            </article>
         </div>
-        <div class="app">
-          <h3>DFP Education</h3>
-          <p>Espacio de información y recursos del centro educativo.</p>
-          <a class="btn ghost" href="#informacion">Explorar</a>
-        </div>
-        <div class="app qr-card" id="qr">
-          <h3>Esta app en tu celular</h3>
-          <p>Escanea el código con la cámara de tu celular para abrir DFP Education.</p>
-          <div class="qr-plate" id="qrPlate" role="img" aria-label="Código QR que abre DFP Education"></div>
-          <p class="qr-url" id="qrUrl"></p>
-          <div class="qr-actions">
-            <button class="btn ghost" id="qrCopy" type="button">Copiar enlace</button>
-            <span class="qr-status" id="qrStatus" role="status" aria-live="polite"></span>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section id="contacto">
-    <div class="wrap">
-      <h2>Sobre este proyecto</h2>
-      <p class="lead">Desarrollado por DFP como práctica de programación y desarrollo web. Es mi primera aplicación y aquí compartiré información sobre nuestro centro educativo.</p>
+<!-- ACEITES -->
+<section id="aceites">
+    <div class="container">
+        <h2>Reciclaje de aceites</h2>
+
+        <p class="description">
+            Conoce qué son los aceites usados y por qué debemos recolectarlos correctamente.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="icon">🛢️</div>
+                <h3>¿Qué es el aceite usado?</h3>
+                <p>
+                    Es el aceite que ya se utilizó para cocinar y que
+                    no debe desecharse directamente por el fregadero o el suelo.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">♻️</div>
+                <h3>Recolección</h3>
+                <p>
+                    Se puede almacenar en recipientes adecuados,
+                    cerrados y entregarse a un programa de recolección autorizado.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">🌍</div>
+                <h3>Reutilización responsable</h3>
+                <p>
+                    El aceite recolectado puede convertirse en materia
+                    prima para otros procesos industriales.
+                </p>
+            </article>
+        </div>
     </div>
-  </section>
+</section>
+
+<!-- IMPACTO -->
+<section id="impacto">
+    <div class="container">
+        <h2>Impacto ambiental</h2>
+
+        <p class="description">
+            Investiguemos cómo el aceite derramado afecta el agua,
+            el suelo y los ecosistemas.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="number">01</div>
+                <h3>Contaminación del agua</h3>
+                <p>
+                    El aceite puede formar una película que dificulta
+                    el intercambio de oxígeno y afecta los ecosistemas acuáticos.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="number">02</div>
+                <h3>Emisiones de CO₂</h3>
+                <p>
+                    Investigar las emisiones relacionadas con el tratamiento,
+                    transporte y aprovechamiento del aceite usado.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="number">03</div>
+                <h3>Daño a los ecosistemas</h3>
+                <p>
+                    El aceite puede alterar las condiciones del agua
+                    y afectar a los organismos que viven en ella.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+    <div class="container">
+        <h2>Productos elaborados</h2>
+
+        <p class="description">
+            Explora productos que pueden elaborarse utilizando
+            aceite reciclado mediante procesos apropiados.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="icon">🧼</div>
+                <h3>Jabones</h3>
+                <p>
+                    Productos de limpieza que pueden elaborarse con
+                    aceite usado tratado adecuadamente.
+                </p>
+                <button class="btn" onclick="seleccionar('Jabones')">
+                    Seleccionar
+                </button>
+            </article>
+
+            <article class="card">
+                <div class="icon">⚡</div>
+                <h3>Biodiésel</h3>
+                <p>
+                    Combustible alternativo que puede producirse
+                    industrialmente a partir de determinados aceites usados.
+                </p>
+                <button class="btn" onclick="seleccionar('Biodiésel')">
+                    Seleccionar
+                </button>
+            </article>
+
+            <article class="card">
+                <div class="icon">🕯️</div>
+                <h3>Otros productos</h3>
+                <p>
+                    Conoce otras alternativas de aprovechamiento que
+                    se investigan en proyectos de reciclaje.
+                </p>
+                <button class="btn" onclick="seleccionar('Otros productos')">
+                    Seleccionar
+                </button>
+            </article>
+        </div>
+
+        <p id="productoSeleccionado" class="highlight" style="margin-top:25px" aria-live="polite">
+            Selecciona un producto para conocerlo.
+        </p>
+    </div>
+</section>
+
+<!-- FORMACIÓN -->
+<section id="formacion">
+    <div class="container">
+        <h2>Capacitación y talleres</h2>
+
+        <p class="description">
+            Espacios para aprender, investigar y participar
+            en actividades de educación ambiental.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="icon">🎓</div>
+                <h3>Capacitaciones</h3>
+                <p>
+                    Información educativa sobre clasificación,
+                    almacenamiento y entrega responsable de aceites usados.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">🧪</div>
+                <h3>Talleres educativos</h3>
+                <p>
+                    Actividades de investigación, demostraciones
+                    supervisadas y aprendizaje ambiental.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">📚</div>
+                <h3>Material educativo</h3>
+                <p>
+                    Guías, recursos, información y actividades
+                    para estudiantes y comunidades.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- DONACIONES -->
+<section id="donaciones">
+    <div class="container">
+        <h2>Donaciones de aceite</h2>
+
+        <p class="description">
+            Cada persona puede contribuir entregando su aceite usado
+            a un programa de recolección.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="icon">🛢️</div>
+                <h3>¿Cómo donar?</h3>
+                <p>
+                    Guarda el aceite usado en un recipiente adecuado,
+                    cerrado y espera las indicaciones del centro de recolección.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">🤝</div>
+                <h3>Participa</h3>
+                <p>
+                    Invita a familiares, estudiantes y negocios a participar
+                    en las campañas de recolección.
+                </p>
+            </article>
+
+            <article class="card">
+                <div class="icon">🌿</div>
+                <h3>Beneficio ambiental</h3>
+                <p>
+                    Una donación correctamente gestionada ayuda a evitar
+                    que el aceite termine contaminando el entorno.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios">
+    <div class="container">
+        <h2>Beneficios ambientales</h2>
+
+        <div class="grid">
+            <article class="card">
+                <h3>💧 Protección del agua</h3>
+                <p>
+                    Evitar el vertido de aceite en desagües,
+                    ríos y otros cuerpos de agua.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>🌎 Menos residuos</h3>
+                <p>
+                    Promover el aprovechamiento responsable de materiales
+                    que todavía pueden tener utilidad.
+                </p>
+            </article>
+
+            <article class="card">
+                <h3>🌱 Educación ambiental</h3>
+                <p>
+                    Construir una comunidad informada y comprometida con el planeta.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- APLICACIONES -->
+<section id="aplicaciones">
+    <div class="container">
+        <h2>Aplicaciones</h2>
+
+        <p class="description">
+            Accede a las plataformas y herramientas que forman parte de DFP Educación.
+        </p>
+
+        <div class="grid">
+            <article class="card">
+                <div class="icon">🎓</div>
+                <h3>EscoSoft</h3>
+                <p>
+                    Sistema de gestión escolar. Accede a tu plataforma educativa.
+                </p>
+                <a class="btn"
+                   href="https://escosoft.online/student/dashboard"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Abrir EscoSoft
+                </a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- MINI JUEGO -->
+<section id="juego">
+    <div class="container">
+
+        <h2>DFP <span class="highlight">Eco Challenge</span></h2>
+
+        <p class="description">
+            Demuestra cuánto sabes sobre el medio ambiente.
+            Responde las 10 preguntas y consigue el máximo de puntos.
+        </p>
+
+        <div class="card eco-game">
+
+            <div class="game-start" id="ecoStart">
+                <div class="eco-trophy">🌎</div>
+                <h3>¡Bienvenido al desafío ambiental!</h3>
+                <p>
+                    10 preguntas · 10 puntos por acierto · 100 puntos posibles.
+                    ¿Estás preparado?
+                </p>
+                <button class="btn" id="ecoStartButton">
+                    Comenzar juego
+                </button>
+            </div>
+
+            <div id="ecoPlay" hidden>
+
+                <div class="game-top">
+                    <span>🌱 RETO AMBIENTAL</span>
+                    <span id="ecoScore">⭐ 0 puntos</span>
+                </div>
+
+                <div class="game-progress">
+                    <div id="ecoProgress"></div>
+                </div>
+
+                <p id="ecoNumber">Pregunta 1 de 10</p>
+
+                <h3 id="ecoQuestion"></h3>
+
+                <div id="ecoOptions" class="eco-options"></div>
+
+                <p id="ecoFeedback" aria-live="polite"></p>
+
+                <button id="ecoNext" class="btn" hidden>
+                    Siguiente pregunta
+                </button>
+            </div>
+
+            <div id="ecoResult" hidden>
+                <div class="eco-trophy">🏆</div>
+                <h3>¡Desafío completado!</h3>
+                <p id="ecoFinalScore"></p>
+                <p id="ecoMessage"></p>
+                <p id="ecoRecord"></p>
+                <button id="ecoRestart" class="btn">
+                    Volver a jugar
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- QR -->
+<section id="qr">
+    <div class="container">
+        <h2>Código QR</h2>
+
+        <p class="description">
+            Escanea el código QR para acceder a DFP Educación desde tu teléfono celular.
+        </p>
+
+        <article class="card qr-card">
+            <h3>Acceso a DFP Educación</h3>
+
+            <div class="qr-plate" id="qrPlate">
+                Generando QR...
+            </div>
+
+            <p id="qrUrl" class="qr-url"></p>
+
+            <button class="btn secondary" id="qrCopy" type="button">
+                Copiar enlace
+            </button>
+
+            <p id="qrStatus" class="highlight" aria-live="polite"></p>
+        </article>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <div class="container">
+        <h2>Contacto</h2>
+
+        <p class="description">
+            ¿Deseas conocer más sobre el proyecto, participar en una
+            capacitación o donar aceite? Ponte en contacto con nosotros.
+        </p>
+
+        <article class="card">
+            <div class="icon">📞</div>
+            <h3>Teléfono local</h3>
+            <p>
+                Próximamente se agregará el número de contacto del proyecto.
+            </p>
+        </article>
+    </div>
+</section>
+
 </main>
 
 <footer>
-  <p>© 2026 DFP Education | Proyecto educativo</p>
-  <p>Desarrollado con HTML, CSS y JavaScript</p>
+    <p><strong>DFP Educación</strong></p>
+    <p>Proyecto de ciencias | Reciclaje de aceites usados</p>
+    <p>© 2026 DFP Educación. Todos los derechos reservados.</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script>
-(function(){
-  /* Fondo que cambia con el recorrido: copa, río, mar, tierra */
-  var stops=[[11,31,26],[18,60,46],[24,84,66],[18,72,92],[12,44,70],[34,44,28]];
-  function lerp(a,b,t){return a+(b-a)*t}
-  function bg(){
-    var max=document.documentElement.scrollHeight-innerHeight, p=max>0?scrollY/max:0;
-    var x=p*(stops.length-1), i=Math.min(Math.floor(x),stops.length-2), t=x-i, a=stops[i], b=stops[i+1];
-    document.body.style.background='rgb('+[0,1,2].map(function(k){return Math.round(lerp(a[k],b[k],t))}).join(',')+')';
-    var h=document.querySelector('.hills .l1'); if(h) h.style.transform='translateY('+(scrollY*.12)+'px)';
-  }
-  addEventListener('scroll',bg,{passive:true}); addEventListener('resize',bg); bg();
 
-  /* Hojas y luciérnagas */
-  var cv=document.getElementById('fx'), cx=cv.getContext('2d'), W,H,P=[], mx=.5;
-  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function size(){var d=devicePixelRatio||1;W=cv.width=innerWidth*d;H=cv.height=innerHeight*d;cv.dpr=d}
-  size(); addEventListener('resize',size);
-  addEventListener('pointermove',function(e){mx=e.clientX/innerWidth});
-  var cols=['#8fd18a','#b6e08a','#d9c76a','#6fbf7a'];
-  function mk(){var leaf=Math.random()<.7;return{x:Math.random()*W,y:Math.random()*H,r:(leaf?5:2)*cv.dpr*(.6+Math.random()),
-    vy:(.25+Math.random()*.6)*cv.dpr,ph:Math.random()*6.28,sp:.004+Math.random()*.01,rot:Math.random()*6.28,leaf:leaf,c:cols[Math.floor(Math.random()*cols.length)]}}
-  for(var i=0;i<(calm?20:70);i++)P.push(mk());
-  function draw(t){
-    cx.clearRect(0,0,W,H);
-    P.forEach(function(p){
-      p.ph+=p.sp; p.rot+=.01;
-      p.y+=(p.leaf?p.vy:-p.vy*.25); p.x+=Math.sin(p.ph*3)*.6*cv.dpr+(mx-.5)*1.4*cv.dpr;
-      if(p.y>H+20){p.y=-20;p.x=Math.random()*W} if(p.y<-20){p.y=H+20} if(p.x<-20)p.x=W+20; if(p.x>W+20)p.x=-20;
-      cx.save(); cx.translate(p.x,p.y);
-      if(p.leaf){cx.rotate(p.rot);cx.globalAlpha=.55;cx.fillStyle=p.c;cx.beginPath();cx.ellipse(0,0,p.r,p.r*.45,0,0,6.28);cx.fill()}
-      else{var g=.4+.6*Math.abs(Math.sin(t/900+p.ph));cx.globalAlpha=g*.8;cx.shadowColor='#ffe98a';cx.shadowBlur=12*cv.dpr;cx.fillStyle='#fff3b0';cx.beginPath();cx.arc(0,0,p.r,0,6.28);cx.fill()}
-      cx.restore();
+<script>
+// PRODUCTOS
+
+function seleccionar(producto) {
+    document.getElementById("productoSeleccionado").textContent =
+        "Has seleccionado: " + producto;
+}
+
+// QR
+
+(function() {
+    const plate = document.getElementById("qrPlate");
+    const urlEl = document.getElementById("qrUrl");
+    const copyBtn = document.getElementById("qrCopy");
+    const status = document.getElementById("qrStatus");
+
+    const appUrl = window.location.href.split("#")[0];
+
+    urlEl.textContent = appUrl;
+
+    try {
+        if (typeof qrcode !== "function") {
+            throw new Error("QR no disponible");
+        }
+
+        const qr = qrcode(0, "M");
+        qr.addData(appUrl);
+        qr.make();
+
+        plate.innerHTML = qr.createSvgTag(4, 2);
+
+        const svg = plate.querySelector("svg");
+
+        if (svg) {
+            svg.setAttribute("role", "img");
+            svg.setAttribute("aria-label", "Código QR de DFP Educación");
+        }
+    } catch(error) {
+        plate.textContent = "No se pudo generar el código QR.";
+        status.textContent = "Comprueba tu conexión a internet.";
+    }
+
+    copyBtn.addEventListener("click", async function() {
+        try {
+            await navigator.clipboard.writeText(appUrl);
+            status.textContent = "¡Enlace copiado!";
+        } catch(error) {
+            status.textContent =
+                "No se pudo copiar. Selecciona el enlace manualmente.";
+        }
     });
-    if(!calm) requestAnimationFrame(draw);
-  }
-  requestAnimationFrame(draw);
-
-  /* Plantar árboles */
-  var box=document.getElementById('bosque'), n=0, msg=document.getElementById('msg');
-  var greens=['#5fbf6a','#4aa860','#7bcf72','#3f9a5a','#8ad07a'];
-  function plant(x,y){
-    var d=document.createElement('div'); d.className='tree';
-    var s=.7+Math.random()*.7; d.style.left=x+'px'; d.style.bottom=Math.max(0,y)+'px';
-    d.style.setProperty('--s',s); d.style.setProperty('--c',greens[Math.floor(Math.random()*greens.length)]);
-    d.innerHTML='<i></i><b></b>'; box.appendChild(d); n++; update();
-  }
-  function update(){
-    document.getElementById('count').textContent=n; document.getElementById('co2').textContent=n*20;
-    msg.textContent = n===0 ? 'Toca cualquier punto de la colina para plantar.' : n<10 ? 'Así empieza un bosque.' : 'Ya se oye el viento entre las hojas.';
-  }
-  box.addEventListener('pointerdown',function(e){
-    var r=box.getBoundingClientRect(); plant(e.clientX-r.left, Math.min(r.bottom-e.clientY-10, r.height*.42));
-  });
-  document.getElementById('plant').addEventListener('click',function(){
-    plant(30+Math.random()*(box.clientWidth-60), Math.random()*box.clientHeight*.4);
-  });
-  document.getElementById('reset').addEventListener('click',function(){
-    box.querySelectorAll('.tree').forEach(function(t){t.remove()}); n=0; update();
-  });
 })();
-</script>
 
-<script>
-(function () {
-  var plate = document.getElementById('qrPlate');
-  var urlEl = document.getElementById('qrUrl');
-  var copyBtn = document.getElementById('qrCopy');
-  var status = document.getElementById('qrStatus');
+// DFP ECO CHALLENGE
 
-  if (!plate || !urlEl || !copyBtn || !status) return;
-
-  // Toma automáticamente la dirección desde la que se está viendo la página.
-  var appUrl = window.location.href.split('#')[0];
-  urlEl.textContent = appUrl;
-
-  try {
-    if (typeof qrcode !== 'function') throw new Error('La librería QR no está disponible.');
-    var qr = qrcode(0, 'M');
-    qr.addData(appUrl);
-    qr.make();
-    plate.innerHTML = qr.createSvgTag(4, 2);
-    var svg = plate.querySelector('svg');
-    if (svg) {
-      svg.setAttribute('role', 'img');
-      svg.setAttribute('aria-label', 'Código QR para abrir DFP Education');
-      svg.setAttribute('shape-rendering', 'crispEdges');
+const ecoQuestions = [
+    {
+        question: "¿Dónde debemos tirar el aceite de cocina usado?",
+        options: ["En el fregadero", "En un recipiente adecuado", "En el río", "En el suelo"],
+        answer: 1,
+        explanation: "El aceite debe almacenarse en un recipiente cerrado y entregarse a un programa de recolección."
+    },
+    {
+        question: "¿Qué significa reciclar?",
+        options: ["Quemar residuos", "Desperdiciar materiales", "Transformar residuos en nuevos recursos", "Enterrar toda la basura"],
+        answer: 2,
+        explanation: "Reciclar permite aprovechar materiales y reducir residuos."
+    },
+    {
+        question: "¿Qué recurso natural debemos proteger?",
+        options: ["El agua", "El plástico", "La basura", "El humo"],
+        answer: 0,
+        explanation: "El agua es esencial para los seres vivos."
+    },
+    {
+        question: "¿Qué debemos hacer con las botellas plásticas?",
+        options: ["Tirarlas al río", "Quemarlas", "Dejarlas en la calle", "Separarlas para reciclar"],
+        answer: 3,
+        explanation: "Separarlas facilita su reciclaje."
+    },
+    {
+        question: "¿Cuál es una fuente de energía renovable?",
+        options: ["Carbón", "Energía solar", "Petróleo", "Gas natural"],
+        answer: 1,
+        explanation: "La energía solar proviene del Sol."
+    },
+    {
+        question: "¿Qué puede provocar tirar aceite al agua?",
+        options: ["Agua más limpia", "Más oxígeno", "Contaminación", "Más vegetación"],
+        answer: 2,
+        explanation: "El aceite puede contaminar el agua y afectar los ecosistemas."
+    },
+    {
+        question: "¿Qué significa reutilizar?",
+        options: ["Volver a utilizar un objeto", "Tirar un objeto", "Comprar más basura", "Destruir materiales"],
+        answer: 0,
+        explanation: "Reutilizar ayuda a reducir la cantidad de residuos."
+    },
+    {
+        question: "¿Qué debemos hacer para ahorrar agua?",
+        options: ["Dejar grifos abiertos", "Desperdiciarla", "Lavar las calles diariamente", "Cerrar el grifo cuando no se utiliza"],
+        answer: 3,
+        explanation: "Cerrar el grifo evita desperdiciar agua."
+    },
+    {
+        question: "¿Qué elemento ayuda a proteger los bosques?",
+        options: ["Talar indiscriminadamente", "Reforestar", "Provocar incendios", "Tirar basura"],
+        answer: 1,
+        explanation: "La reforestación contribuye a recuperar áreas verdes."
+    },
+    {
+        question: "¿Cuál es el objetivo de DFP Educación?",
+        options: ["Promover la contaminación", "Desperdiciar recursos", "Educar y promover el cuidado ambiental", "Eliminar el reciclaje"],
+        answer: 2,
+        explanation: "La educación ambiental ayuda a proteger nuestro planeta."
     }
-  } catch (error) {
-    plate.textContent = 'No se pudo generar el QR. Comprueba tu conexión a internet.';
-    status.textContent = 'Usa el enlace que aparece arriba.';
-  }
+];
 
-  copyBtn.addEventListener('click', function () {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(appUrl).then(function () {
-        status.textContent = '¡Enlace copiado!';
-      }).catch(function () {
-        status.textContent = 'No se pudo copiar. Selecciona el enlace para copiarlo.';
-      });
+let ecoIndex = 0;
+let ecoPoints = 0;
+let ecoAnswered = false;
+
+const ecoStart = document.getElementById("ecoStart");
+const ecoPlay = document.getElementById("ecoPlay");
+const ecoResult = document.getElementById("ecoResult");
+const ecoQuestion = document.getElementById("ecoQuestion");
+const ecoOptions = document.getElementById("ecoOptions");
+const ecoFeedback = document.getElementById("ecoFeedback");
+const ecoScore = document.getElementById("ecoScore");
+const ecoNumber = document.getElementById("ecoNumber");
+const ecoProgress = document.getElementById("ecoProgress");
+const ecoNext = document.getElementById("ecoNext");
+
+function ecoLoadQuestion() {
+    ecoAnswered = false;
+
+    const current = ecoQuestions[ecoIndex];
+
+    ecoQuestion.textContent = current.question;
+    ecoNumber.textContent = `Pregunta ${ecoIndex + 1} de ${ecoQuestions.length}`;
+    ecoScore.textContent = `⭐ ${ecoPoints} puntos`;
+
+    ecoProgress.style.width =
+        `${(ecoIndex / ecoQuestions.length) * 100}%`;
+
+    ecoFeedback.textContent = "";
+    ecoNext.hidden = true;
+    ecoOptions.innerHTML = "";
+
+    current.options.forEach((option, index) => {
+        const button = document.createElement("button");
+
+        button.className = "eco-option";
+        button.textContent = option;
+        button.type = "button";
+
+        button.addEventListener("click", () => {
+            ecoCheckAnswer(index, button);
+        });
+
+        ecoOptions.appendChild(button);
+    });
+}
+
+function ecoCheckAnswer(selected, button) {
+    if (ecoAnswered) return;
+
+    ecoAnswered = true;
+
+    const current = ecoQuestions[ecoIndex];
+    const buttons = ecoOptions.querySelectorAll("button");
+
+    buttons.forEach((btn, index) => {
+        btn.disabled = true;
+
+        if (index === current.answer) {
+            btn.classList.add("correct");
+        }
+    });
+
+    if (selected === current.answer) {
+        ecoPoints += 10;
+        ecoFeedback.textContent = "¡Respuesta correcta! " + current.explanation;
     } else {
-      status.textContent = 'Selecciona el enlace para copiarlo.';
-      var range = document.createRange();
-      range.selectNodeContents(urlEl);
-      var selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+        button.classList.add("incorrect");
+        ecoFeedback.textContent = "Respuesta incorrecta. " + current.explanation;
     }
-  });
-})();
+
+    ecoScore.textContent = `⭐ ${ecoPoints} puntos`;
+
+    ecoProgress.style.width =
+        `${((ecoIndex + 1) / ecoQuestions.length) * 100}%`;
+
+    ecoNext.hidden = false;
+
+    ecoNext.textContent =
+        ecoIndex === ecoQuestions.length - 1
+        ? "Ver resultado"
+        : "Siguiente pregunta";
+}
+
+function ecoFinish() {
+    ecoPlay.hidden = true;
+    ecoResult.hidden = false;
+
+    document.getElementById("ecoFinalScore").textContent =
+        `Tu puntuación: ${ecoPoints} / 100 puntos`;
+
+    let record = Number(localStorage.getItem("dfpEcoRecord")) || 0;
+
+    if (ecoPoints > record) {
+        record = ecoPoints;
+        localStorage.setItem("dfpEcoRecord", record);
+    }
+
+    document.getElementById("ecoRecord").textContent =
+        `🏆 Tu récord: ${record} puntos`;
+
+    let message;
+
+    if (ecoPoints === 100) {
+        message = "¡Excelente! ¡Eres un campeón ambiental!";
+    } else if (ecoPoints >= 70) {
+        message = "¡Muy buen trabajo! Tienes conocimientos ambientales.";
+    } else if (ecoPoints >= 40) {
+        message = "¡Buen intento! Sigue aprendiendo sobre el planeta.";
+    } else {
+        message = "Sigue practicando. ¡Cada aprendizaje cuenta!";
+    }
+
+    document.getElementById("ecoMessage").textContent = message;
+}
+
+document.getElementById("ecoStartButton").addEventListener("click", () => {
+    ecoStart.hidden = true;
+    ecoPlay.hidden = false;
+    ecoResult.hidden = true;
+
+    ecoIndex = 0;
+    ecoPoints = 0;
+
+    ecoLoadQuestion();
+});
+
+ecoNext.addEventListener("click", () => {
+    if (ecoIndex < ecoQuestions.length - 1) {
+        ecoIndex++;
+        ecoLoadQuestion();
+    } else {
+        ecoFinish();
+    }
+});
+
+document.getElementById("ecoRestart").addEventListener("click", () => {
+    ecoIndex = 0;
+    ecoPoints = 0;
+
+    ecoResult.hidden = true;
+    ecoStart.hidden = false;
+    ecoPlay.hidden = true;
+});
 </script>
 
 </body>
